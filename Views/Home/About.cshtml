@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+@User.Identity.IsAuthenticated
+@User.Identity.Name
+@if (User.IsInRole("Admin"))
+{
+    @*foreach(var i in User.Claims)
+    {
+        <p>i</p>
+    }*@
+    Context.User.FindFirst("role");
+    
+}
+<p>Use this area to provide additional information.</p>
