@@ -52,9 +52,9 @@ namespace CookieLogin
         private async Task GenerateToken(HttpContext context)
         {
             var username = context.Request.Form["username"];
-            var password = context.Request.Form["password"];
+            //var password = context.Request.Form["password"];
 
-            var identity = await GetIdentity(username, password);
+            var identity = await GetIdentity(username);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
@@ -67,7 +67,7 @@ namespace CookieLogin
             var claims = new Claim[]
             {
         new Claim(JwtRegisteredClaimNames.Sub, username),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         new Claim(ClaimTypes.Name, "Keshav"),
         new Claim(ClaimTypes.Role, "Admin")
             };
@@ -122,10 +122,10 @@ namespace CookieLogin
             }));
         }
 
-        private Task<ClaimsIdentity> GetIdentity(string username, string password)
+        private Task<ClaimsIdentity> GetIdentity(string username)
         {
             // DON'T do this in production, obviously!
-            if (username == "Keshav" && password == "")
+            if (username == "Keshav")
             {
                 return Task.FromResult(new ClaimsIdentity(new System.Security.Principal.GenericIdentity(username, "Token"), new Claim[] { }));
             }

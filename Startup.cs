@@ -95,7 +95,7 @@ namespace CookieLogin
                 SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
             };
 
-            app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options));
+            //app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options));
             app.UseMiddleware<JWTInHeaderMiddleware>();
             app.UseAuthentication();
             app.UseMvc(routes =>

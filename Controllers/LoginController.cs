@@ -84,7 +84,7 @@ namespace CookieLogin.Controllers
         {
             ApplicationUser user = null;
 
-            if (loginVM.UserName == "Keshav")
+            if (loginVM.username == "Keshav")
             {
                 user = new ApplicationUser { UserName = "Keshav" };
             }

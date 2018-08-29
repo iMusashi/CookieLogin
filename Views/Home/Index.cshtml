@@ -14,17 +14,17 @@
 
 <form asp-controller="Home" asp-action="PostIndex" method="post">
     <div class="form-group row">
-        <label asp-for="UserName" class="col-md-4 control-label"></label>
+        <label asp-for="username" class="col-md-4 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="UserName" type="text" class="form-control" />
+            <input asp-for="username" type="text" class="form-control" />
         </div>
     </div>
-    <div class="form-group row">
+    @*<div class="form-group row">
         <label class="col-md-4 control-label" asp-for="Password"></label>
         <div class="col-md-4">
             <input type="text" asp-for="Password" class="form-control" />
         </div>
-    </div>
+    </div>*@
     <div class="float-right">
         <button class="btn btn-primary">Submit</button>
     </div>
