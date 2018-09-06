@@ -1,6 +1,4 @@
-using System;
-
-namespace CookieLogin.Models
+namespace AutomobileCMS.Models
 {
     public class ErrorViewModel
     {

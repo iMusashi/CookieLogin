@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CookieLogin
+namespace AutomobileCMS
 {
     public class JWTInHeaderMiddleware
     {

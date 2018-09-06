@@ -30,3 +30,4 @@ G:\Keshav\Projects\EF\CookieLogin\obj\Debug\netcoreapp2.1\CookieLogin.dll
 G:\Keshav\Projects\EF\CookieLogin\obj\Debug\netcoreapp2.1\CookieLogin.pdb
 G:\Keshav\Projects\EF\CookieLogin\obj\Debug\netcoreapp2.1\CookieLogin.csproj.CopyComplete
 G:\Keshav\Projects\EF\CookieLogin\obj\Debug\netcoreapp2.1\CookieLogin.csprojAssemblyReference.cache
+G:\Keshav\Projects\EF\CookieLogin\obj\Debug\netcoreapp2.1\Razor\Views\Security\Index.g.cshtml.cs

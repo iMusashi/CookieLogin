@@ -1,10 +1,6 @@
-﻿using CookieLogin.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutomobileCMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,28 +8,21 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace CookieLogin.Controllers
+namespace AutomobileCMS.Controllers
 {
     public class LoginController : ControllerBase
     {
-        private IConfiguration Configuration;
-        private SignInManager<ApplicationUser> _signInManager;
-        private UserManager<ApplicationUser> _userManager;
-        private IAuthenticationService _authenticationService;
+        private readonly IConfiguration Configuration;
 
-        public LoginController(IConfiguration configuration, IAuthenticationService authenticationService)
+        public LoginController(IConfiguration configuration)
         {
             Configuration = configuration;
-            //_signInManager = signInManager;
-            //_userManager = userManager;
-            _authenticationService = authenticationService;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginVM loginVM)
+        public IActionResult Login(LoginVM loginVM)
         {
             IActionResult response = Unauthorized();
 
@@ -59,7 +48,6 @@ namespace CookieLogin.Controllers
             Path = "/"
         }
     );
-
 
                 response = Ok(tokenString);
             }

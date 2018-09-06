@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CookieLogin.Models
+namespace AutomobileCMS.Models
 {
     public class ApplicationUser : IdentityUser
     {

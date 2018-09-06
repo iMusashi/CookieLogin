@@ -1,4 +1,4 @@
-﻿@model CookieLogin.Models.LoginVM
+﻿@model AutomobileCMS.Models.LoginVM
 @User.Identity.Name
 @if (User.IsInRole("Admin"))
 {
@@ -12,20 +12,34 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form asp-controller="Home" asp-action="PostIndex" method="post">
+<form asp-controller="Home" asp-action="About" data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-confirm="true"
+      data-ajax-update="#xyz"
+      data-ajax-begin="begin"
+      data-ajax-success="success"
+      data-ajax-failure="failure"
+      data-ajax-complete="complete"
+      data-ajax-mode="InsertAfter">
     <div class="form-group row">
-        <label asp-for="username" class="col-md-4 control-label"></label>
-        <div class="col-md-4">
-            <input asp-for="username" type="text" class="form-control" />
-        </div>
+        @if (!String.IsNullOrEmpty(Model.username))
+        {
+            <label asp-for="username" class="col-md-4 control-label"></label>
+            <div id="xyz" class="col-md-4">
+                <input asp-for="username" type="text" class="form-control" readonly="@(Model.CurrentStatus.Equals(Stages.WalkinInward))" />
+            </div>
+        }
     </div>
-    @*<div class="form-group row">
+    <div class="form-group row">
         <label class="col-md-4 control-label" asp-for="Password"></label>
         <div class="col-md-4">
             <input type="text" asp-for="Password" class="form-control" />
         </div>
-    </div>*@
+    </div>
     <div class="float-right">
         <button class="btn btn-primary">Submit</button>
     </div>
+    <div id="Results"></div>
 </form>
+<script src="~/js/site.js">
+</script>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 
-namespace CookieLogin
+namespace AutomobileCMS
 {
     public class TokenProviderOptions
     {

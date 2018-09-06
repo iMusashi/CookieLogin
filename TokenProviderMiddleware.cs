@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookieLogin
+namespace AutomobileCMS
 {
     public class TokenProviderMiddleware
     {
@@ -25,6 +25,7 @@ namespace CookieLogin
         }
 
         private IConfiguration Configuration;
+
         public TokenProviderMiddleware(IConfiguration configuration)
         {
             Configuration = configuration;

@@ -11506,9 +11506,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Keshav\\Projects\\EF\\CookieLogin\\CookieLogin.csproj",
-      "projectName": "CookieLogin",
-      "projectPath": "G:\\Keshav\\Projects\\EF\\CookieLogin\\CookieLogin.csproj",
+      "projectUniqueName": "G:\\Keshav\\Projects\\EF\\CookieLogin\\AutomobileCMS.csproj",
+      "projectName": "AutoMobileCMS",
+      "projectPath": "G:\\Keshav\\Projects\\EF\\CookieLogin\\AutomobileCMS.csproj",
       "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
       "outputPath": "G:\\Keshav\\Projects\\EF\\CookieLogin\\obj\\",
       "projectStyle": "PackageReference",

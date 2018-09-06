@@ -1,0 +1,70 @@
+﻿@model AutomobileCMS.ViewModels.SecurityEntry
+@{
+    ViewData["Title"] = "Security";
+}
+
+<div id="mdlSpinner" class="modal bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width: 48px">
+            <span class="fas fa-spinner fa-spin fa-3x"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    @Html.BeginForm()
+    <form class="form-inline" asp-action="InsertDetails"
+          data-ajax="true"
+          data-ajax-method="get"
+          data-ajax-begin="begin"
+          data-ajax-success="success"
+          data-ajax-failure="failure"
+          data-ajax-complete="complete"
+          data-ajax-update="#insertDetails"
+          data-ajax-mode="before"
+          novalidate    >
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label asp-for="RegistrationNo" class="mr-2 "></label>
+        <div class="form-group">
+            <input asp-for="RegistrationNo" placeholder="e.g 3456 or MH04EW3456" class="form-control mr-2 is-invalid" style="width:210px;">
+            <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+            @*<div class="invalid-feedback">
+                Maximum 10 characters allowed.
+            </div>*@
+        </div>
+        <button id="searchEntry" class="btn btn-primary mr-2">Search</button>
+        @*type="submit" data-url="@Url.Action("InsertDetails", "Security")"*@
+    </form>
+    <form asp-action="CreateDetails"
+          data-ajax="true"
+          data-ajax-method="get"
+          data-ajax-update="#insertDetails"
+          data-ajax-mode="after"
+          data-ajax-begin="begin"
+          data-ajax-success="success"
+          data-ajax-failure="failure"
+          data-ajax-complete="complete">
+        <button id="createEntry" class="btn btn-primary">Create New Entry</button>
+    </form>
+</div>
+<div id="insertDetails">
+    Let'scheck'
+</div>
+@section Scripts{
+    <script>
+        $("#RegistrationNo").keydown(function (e) {
+            var k = e.keyCode || e.which;
+            var ok = k >= 65 && k <= 90 || // A-Z
+                k >= 96 && k <= 105 || // a-z
+                k >= 35 && k <= 40 || // arrows
+                k == 9 || //tab
+                k == 46 || //del
+                k == 8 || // backspaces
+                (!e.shiftKey && k >= 48 && k <= 57); // only 0-9 (ignore SHIFT options)
+
+            if (!ok || (e.ctrlKey && e.altKey)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+}
