@@ -1,0 +1,125 @@
+﻿@model AutomobileCMS.Areas.Home.ViewModels.LoginVM
+@*<partial name="_LoginPartial" />*@
+<h2 class="text-center">Login Form</h2>
+
+
+<div class="modal-dialog">
+    <div class="modal-content p-4">
+        <form id="loginForm" asp-action="Index">
+            <div asp-validation-summary="All" class="text-right text-danger"></div>
+            <div class="row">
+                <label asp-for="username" class="col-md-4"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="username" class="form-control" />
+                    <span asp-validation-for="username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <label asp-for="password" class="col-md-4"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="password" class="form-control" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-md-12 d-flex">
+                    @*<input id="loginSubmit" class="btn btn-primary ml-auto" value="Confirm" type="button">*@
+                    @*<a href="javascript:void(0)" class='form-reset'>Reset</a>
+                    <input type="reset" value="Reset" />*@
+                    <button id="loginSubmit" class="btn btn-primary ml-auto" type="submit">Confirm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        //$(function () {
+        //    $('.form-reset').on('click', function () {
+        //        $(this).formReset();
+        //        return false;
+        //    });
+
+        //    $('input[type=reset]').on('click', function () {
+        //        $(this).resetValidation();
+        //    });
+        //});
+        //(function ($) {
+
+        //    //re-set all client validation given a jQuery selected form or child
+        //    $.fn.resetValidation = function () {
+
+        //        var $form = this.closest('form');
+
+        //        //reset jQuery Validate's internals
+        //        $form.validate().resetForm();
+
+        //        //reset unobtrusive validation summary, if it exists
+        //        $form.find("[data-valmsg-summary=true]")
+        //            .removeClass("validation-summary-errors")
+        //            .addClass("validation-summary-valid")
+        //            .find("ul").empty();
+
+        //        //reset unobtrusive field level, if it exists
+        //        $form.find("[data-valmsg-replace]")
+        //            .removeClass("field-validation-error")
+        //            .addClass("field-validation-valid")
+        //            .empty();
+
+        //        return $form;
+        //    };
+
+        //    //reset a form given a jQuery selected form or a child
+        //    //by default validation is also reset
+        //    $.fn.formReset = function (resetValidation) {
+        //        var $form = this.closest('form');
+
+        //        $form[0].reset();
+
+        //        if (resetValidation == undefined || resetValidation) {
+        //            $form.resetValidation();
+        //        }
+
+        //        return $form;
+        //    }
+        //})(jQuery);
+
+        @*$("#loginSubmit").on("click", function () {
+            var formObj = $(this).closest('form');
+            if (!formObj.valid())
+                return;
+            var loginVM = {
+                username: "'"+ $('#username').val() + "'",
+                password: "'" + $('#password').val() + "'"
+            };
+            //var username = $('#username').val();
+            $.ajax({
+                url: '@Url.Action("Login")',
+                type: 'Post',
+                dataType:'html',
+                data: { loginVM },
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    console.log(data);
+                    console.log(obj.success);
+                    console.log(obj.message);
+                    console.log(obj.targetURL);
+                    window.location = obj.targetURL;
+                },
+                error: function (jqxhr, data, exception) {
+                    alert( jqxhr.status, data, exception);
+                }
+            });
+        });*@
+
+        //$("#loginForm").on("click", function () {
+        //    $(this).reset
+        //});
+
+        //$("#loginModal").modal('show');
+
+
+    </script>
+}

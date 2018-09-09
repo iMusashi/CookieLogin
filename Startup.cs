@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutomobileCMS.Domain.Services.Home;
+using AutomobileCMS.Domain.Services.Home.Interfaces;
+using AutomobileCMS.Infrastructure.ClientLibrary.ClientService;
+using AutomobileCMS.Utilities.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +20,7 @@ namespace AutomobileCMS
     {
         public Startup(IConfiguration configuration)
         {
-            //Configuration = configuration;
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -22,10 +28,6 @@ namespace AutomobileCMS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-            var x = Configuration["Jwt:Audience"];
-            services.Configure<JwtTokenOptions>(Configuration.GetSection("Jwt"));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -33,37 +35,37 @@ namespace AutomobileCMS
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            List<string> s = new List<string>();
-            var a = (IEnumerable<string>)s;
-            a.Where(a => EF.Functions.Like(a.N))
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-            //var tokenValidationParameters = new TokenValidationParameters()
-            //{
-            //    ValidateIssuer = true,
-            //    ValidateAudience = true,
-            //    ValidateLifetime = true,
-            //    ValidateIssuerSigningKey = true,
-            //    ValidIssuer = Configuration["Jwt:Issuer"],
-            //    ValidAudience = Configuration["Jwt:Audience"],
-            //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-            //};
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options =>
-            //   {
-            //       options.Cookie.HttpOnly = true;
-            //       options.Cookie.Path = "/";
-            //       options.LoginPath = "/";
-            //       options.SlidingExpiration = true;
-            //       options.Cookie.Expiration = new System.TimeSpan(10, 0, 0, 0);
-            //       options.Cookie.Name = ".AspNetCore.WmsCookie";
-            //   });
-            //.AddJwtBearer(options =>
-            //{
-            //    options.TokenValidationParameters = tokenValidationParameters;
-            //});
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                options.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddCookie(options =>
+               {
+                   options.Cookie.HttpOnly = true;
+                   options.Cookie.Path = "/";
+                   options.LoginPath = "/";
+                   options.SlidingExpiration = true;
+                   options.Cookie.Expiration = new System.TimeSpan(10, 0, 0, 0);
+                   options.Cookie.Name = ".AspNetCore.WmsCookie";
+               });
+            
+            services.Configure<TokenValidationOptions>(Configuration.GetSection("Jwt"));
+
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            services.AddTransient<IIdentityService, IdentityService>();
+            services.AddHttpClient<IdentityClient>();
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("CanAccessContact", policy => policy.RequireAssertion(context =>
@@ -95,12 +97,13 @@ namespace AutomobileCMS
 
             //app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options));
             //app.UseMiddleware<JWTInHeaderMiddleware>();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Security}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "areas",
+                    areaName:"Home",
+                    template: "{controller=Identity}/{action=Index}/{id?}");
             });
         }
     }

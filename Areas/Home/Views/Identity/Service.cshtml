@@ -1,0 +1,8 @@
+﻿@model AutomobileCMS.Areas.Home.ViewModels.ServiceVM
+<form asp-controller="Identity" asp-action="Service" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-right text-danger"></div>
+    <input type="text" class="form-control" asp-for="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <button class="btn btn-primary" type="submit">Call Service</button>
+</form>

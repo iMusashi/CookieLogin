@@ -126,7 +126,7 @@ Write(User.Identity.Name);
             WriteLiteral("<p>Use this area to provide additional information.</p>\r\n");
             EndContext();
             BeginContext(357, 115, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c74d1f104be44c29ec9ebc611e3db11", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2d31e94965e42108a97adde00e33b1d", async() => {
                 BeginContext(418, 47, true);
                 WriteLiteral("<button class=\"btn btn-primary\">Logout</button>");
                 EndContext();
